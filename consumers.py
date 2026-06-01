@@ -2,6 +2,7 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from google import genai
 from google.genai import types
+import os
 
 # Gemini Client Initialize karein (Apni API key yahan dalein)
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
