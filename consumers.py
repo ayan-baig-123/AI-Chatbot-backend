@@ -4,7 +4,7 @@ from google import genai
 from google.genai import types
 
 # Gemini Client Initialize karein (Apni API key yahan dalein)
-client = genai.Client(api_key="AIzaSyAd7WnJiXQHrdwAhtjWARnzwn9ICc41Wa8")
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
