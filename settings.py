@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ta+wv+$kq&4)azskh$zyin0-d)#%8ea02%q^f(&x)f(p1z=5=5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'channels',
-    'chat', 
+    'channels', 
 ]
 
 MIDDLEWARE = [
@@ -52,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'server_chat.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -69,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'server_chat.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
@@ -119,7 +118,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-ASGI_APPLICATION = 'server_chat.asgi.application'
+ASGI_APPLICATION = 'asgi.application'
 
 CHANNEL_LAYERS = {
     "default": {
