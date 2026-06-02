@@ -37,11 +37,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
             genai.configure(api_key=api_key)
 
             # 🔥 STEP 3: System Instruction set karein stable package ke mutabiq
+            # 🔥 Isko simple 'gemini-pro' kar dein, yeh har library par chalta hai
             model = genai.GenerativeModel(
-                model_name='models/gemini-1.5-flash',  # <--- Yahan 'models/' lagana zaroori hai
+                model_name='gemini-pro',  # <--- 'models/gemini-1.5-flash' ki jagah yeh likhein
                 system_instruction="You are a helpful, witty, and friendly AI chat assistant. Respond in Roman Urdu mixed with English (Hinglish), keeping answers concise and natural for a chat app."
             )
-
+            
             # 🔥 STEP 4: Response generate karein
             # Isko safe chalane ke liye sync_to_async ki zaroorat nahi, direct response chalega
             response = model.generate_content(
