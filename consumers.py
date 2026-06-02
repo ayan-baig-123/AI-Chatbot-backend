@@ -4,9 +4,6 @@ from google import genai
 from google.genai import types
 import os
 
-# Gemini Client Initialize karein (Apni API key yahan dalein)
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
-
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.accept()
@@ -14,7 +11,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         
         # Bot welcome message
         await self.send(text_data=json.dumps({
-            'message': "🤖 AI Bot: Assalam-o-Alaikum! I am your AI assisstant . what's on your mind today"
+            'message': "🤖 AI Bot: Assalam-o-Alaikum! I am your AI assistant. What's on your mind today?"
         }))
 
     async def disconnect(self, close_code):
@@ -30,13 +27,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }))
 
         try:
-            # 2. AI ko system instruction dena taake wo short aur chat-friendly jawab de
+            # 🔥 FIX: Client ko yahan andar initialize karein taake Render ki Key har haal mein mile
+            api_key = os.environ.get("GEMINI_API_KEY")
+            client = genai.Client(api_key=api_key)
+
+            # 2. AI ko system instruction dena
             config = types.GenerateContentConfig(
                 system_instruction="You are a helpful, witty, and friendly AI chat assistant. Respond in Roman Urdu mixed with English (Hinglish), keeping answers concise and natural for a chat app.",
                 temperature=0.7,
             )
 
-            # 3. Gemini API se Real-time Jawab mangwāna (Hum modern gemini-2.5-flash use kar rahe hain)
+            # 3. Gemini API se Real-time Jawab mangwāna
             response = client.models.generate_content(
                 model='gemini-2.5-flash',
                 contents=user_message,
@@ -46,8 +47,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
             ai_reply = f"🤖 AI: {response.text}"
 
         except Exception as e:
-            print(f"Error calling AI API: {e}")
-            ai_reply = "🤖 AI: Sorry bhai, lagta hai API key sahi nahi hai ya internet ka masla hai."
+            # Render ke logs mein asli error dekhne ke liye print zaroori hai
+            print(f"❌ Error calling AI API: {e}")
+            ai_reply = f"🤖 AI: Sorry bhai, backend par yeh error aaya hai: {e}"
 
         # 4. AI ka generated jawab frontend ko bhejien
         await self.send(text_data=json.dumps({
