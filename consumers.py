@@ -38,7 +38,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
             # 🔥 STEP 3: System Instruction set karein stable package ke mutabiq
             model = genai.GenerativeModel(
-                model_name='gemini-1.5-flash', # Yeh model har key par 100% free aur active chalta hai
+                model_name='models/gemini-1.5-flash',  # <--- Yahan 'models/' lagana zaroori hai
                 system_instruction="You are a helpful, witty, and friendly AI chat assistant. Respond in Roman Urdu mixed with English (Hinglish), keeping answers concise and natural for a chat app."
             )
 
