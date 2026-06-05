@@ -14,7 +14,7 @@ def generate_ai_response(user_message, api_key):
         client = genai.Client(api_key=api_key)
         
         config = types.GenerateContentConfig(
-            system_instruction="You are a helpful, witty, and friendly AI chat assistant. Respond in Roman Urdu mixed with English (Hinglish), keeping answers concise and natural for a chat app.",
+            system_instruction="You are a helpful, witty, and friendly AI chat assistant. Respond in English but if user says to talk in other language so you talk in that language, keeping answers concise and natural for a chat app.",
             temperature=0.7,
         )
         
